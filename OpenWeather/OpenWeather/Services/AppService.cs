@@ -28,6 +28,7 @@ namespace OpenWeather.Services
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 WriteIndented = true,
+                PropertyNameCaseInsensitive = true,
             };
         }
 

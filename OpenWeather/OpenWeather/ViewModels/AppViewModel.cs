@@ -17,7 +17,7 @@ namespace OpenWeather.ViewModels
         AppService appService;
       
         [ObservableProperty]
-        public string cityName=null;
+        public string cityName;
 
         [ObservableProperty]
         public double lat;
@@ -89,7 +89,7 @@ namespace OpenWeather.ViewModels
                 Wind = weatherResponse.wind.Speed;
                 Visible = true;
             }
-            else
+            else if (weatherResponse is null)
             {
                 App.Current.MainPage.DisplayAlert("ERRO", "NAO FOI POSSIVEL ENCONTRAR AS INFORMAÇÔES,TENTE NOVAMENTE", "OK");
             }
