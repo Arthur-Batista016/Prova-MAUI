@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenWeather.Models
 {
-    internal class WeatherResponse
+    public class WeatherResponse
     {
         public Coord coord {  get; set; }
         public List<Weather> weather { get; set; }
@@ -21,5 +21,5 @@ namespace OpenWeather.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int Cod  { get; set; }
-            }
+     }
 }

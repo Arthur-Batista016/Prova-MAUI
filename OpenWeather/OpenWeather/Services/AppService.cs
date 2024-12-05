@@ -1,5 +1,4 @@
-﻿
-using OpenWeather.Models;
+﻿using OpenWeather.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 
+
 namespace OpenWeather.Services
 {
     internal class AppService
@@ -18,9 +18,9 @@ namespace OpenWeather.Services
         private HttpClient httpClient;
         private string ApiKey = "15d05aa6d398085bd0bc3088d06a1e49";
         private string BaseUrl = "https://api.openweathermap.org/data/2.5/weather";
-        public WeatherResponse WeatherResponse;
-        private JsonSerializerOptions jsonSerializerOptions; 
-        
+        public WeatherResponse weatherResponse;
+        private JsonSerializerOptions jsonSerializerOptions;
+
         public AppService()
         {
             httpClient = new HttpClient();
@@ -32,56 +32,45 @@ namespace OpenWeather.Services
         }
 
 
-      
-       ////PERSONALIZAR OS ICONS DE CLIMA
 
-        
+        ////PERSONALIZAR OS ICONS DE CLIMA
+
+
         ///PROCURAR POR CIDADE
 
         public async Task<WeatherResponse> getWeatherbyCity(string cityName)
         {
             var url = $"{BaseUrl}?q={cityName}&appid={ApiKey}&units=metric&lang=pt";
-        try
-        {
-            HttpResponseMessage response = await httpClient.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-        {
-            string content = await response.Content.ReadAsStringAsync();// tranforma o conteudo em string;
-            WeatherResponse = JsonSerializer.Deserialize<WeatherResponse>(content, jsonSerializerOptions);
-        }
-    }
-    catch
-    {
-
-    }
-    return WeatherResponse;
-
-}
-
-        //Procurar por coordenadas do gps
-
-        public async Task<WeatherResponse> GetWeatherByGps(string lat, string lon)
-        {
-            var url = $"{BaseUrl}?lat={lat}&lon={lon}&appid={ApiKey}&units=metric&lang=pt";
             try
             {
                 HttpResponseMessage response = await httpClient.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();// tranforma o conteudo em string;
-                    WeatherResponse = JsonSerializer.Deserialize<WeatherResponse>(content, jsonSerializerOptions);
+                    weatherResponse = JsonSerializer.Deserialize<WeatherResponse>(content, jsonSerializerOptions);
+                    if (weatherResponse == null)
+                    {
+                        Console.WriteLine("A deserialização retornou nulo.");
+                    }
                 }
+                else
+                {
+                    Console.WriteLine($"Falha ao chamar a API. Código de status: {response.StatusCode}");
+                }
+
+
+
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine($"Erro ao fazer a chamada da API: {ex.Message}");
             }
-            return WeatherResponse;
 
+            return weatherResponse;
         }
 
 
-
+      
 
 
     }

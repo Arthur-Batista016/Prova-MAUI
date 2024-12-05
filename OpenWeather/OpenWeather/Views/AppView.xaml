@@ -1,36 +1,162 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OpenWeather.Views.AppView">
+             x:Class="OpenWeather.Views.AppView"
+             BackgroundColor="LightGray">
     <ScrollView>
         <VerticalStackLayout>
-        <Image
-            Source="logo.png"
-            HeightRequest="200"
+            <Image
+                Source="logo.png"
+                HeightRequest="100"
             />
 
-        <Label 
-            Text="DIGITE O NOME DA SUA CIDADE OU A LOCALIZAÇÂO DO GPS PARA VISUALIZAR AS CONDIÇÕES METEREOLÓGICAS"
-            HorizontalOptions="Center"
-            Margin="0,60,0,0"
-           />
+         
+                <Label 
+                Text="DIGITE O NOME DA SUA CIDADE PARA VISUALIZAR AS CONDIÇÕES METEREOLÓGICAS"
+                HorizontalOptions="Center"
+                Margin="20,40,0,0"
+            />
+            <Grid>
+                <Entry
+                Text="{Binding CityName}"
+                Placeholder="Digite Aqui"
+                WidthRequest="300"
+                HeightRequest="50"
+                Margin="0,40,200,0"
+                
+            />
+            
+            <Button
+                Text="BUSCAR INFOS"
+                WidthRequest="200"
+                Margin="300,40,0,0"
+                Command="{Binding buscarCommand}"
+               
+            />
+            </Grid>
 
-        <Entry
-            Placeholder="Digite o Local"
-            WidthRequest="600"
+
+
+
+
+
+
+            <Image
+                Source="{Binding Icone}"
+                HeightRequest="100"
+                Margin="0,50,0,0"
+                />
+
+            <Label
+                Text="{Binding Temp, StringFormat='{0}°C'}"
+                IsVisible="{Binding Visible}"
+                HorizontalOptions="Center"
+                FontSize="40"
+                Margin="0,0,0,0"
+               
             />
 
-        <Button
-            Text="BUSCAR INFOS"
-            WidthRequest="300"
-            Margin="0,40,0,0"
+            
+            <Label
+             Text="{Binding Name}"
+             IsVisible="{Binding Visible}"
+             HorizontalOptions="Center"
+             FontSize="30"
+            />
+
+            <Grid>
+                <Label
+             Text="{Binding Lat}"
+             IsVisible="{Binding Visible}"
+             HorizontalOptions="Center"
+             Margin="0,0,150,0"
+             FontSize="30"
+            />
+
+                <Label
+             Text="{Binding Lon}"
+             IsVisible="{Binding Visible}"
+             HorizontalOptions="Center"
+             Margin="150,0,0,0"
+             FontSize="30"
+            />
+            </Grid>
+
+            <Border  Stroke="Beige"  StrokeThickness="4"  StrokeShape="RoundRectangle 40,40,40,40" Background="Beige" WidthRequest="1000" HeightRequest="200" IsVisible="{Binding Visible}" Margin="0,0,0,0" >
+                <Grid Margin="0,100,0,0">
+                <Label
+                    Text="CLIMA"
+                    HorizontalOptions="Center"
+                    Margin="0,-50,500,0"
+                    FontSize="25"
+                     IsVisible="{Binding Visible}"
+                     FontAttributes="Bold"
+                    />
+                <Label
+                    Text="DESCRIÇÂO"
+                    HorizontalOptions="Center"
+                    Margin="0,-50,100,0"
+                    FontSize="25"
+                     IsVisible="{Binding Visible}"
+                     FontAttributes="Bold"
+                    />
+                <Label
+                    Text="UMIDADE"
+                    HorizontalOptions="Center"
+                    Margin="300,-50,0,0"
+                    FontSize="25"
+                     IsVisible="{Binding Visible}"
+                     FontAttributes="Bold"
+                    />
+                <Label
+                    Text="VENTO"
+                    HorizontalOptions="Center"
+                    Margin="600,-50,0,0"
+                    FontSize="25"
+                     IsVisible="{Binding Visible}"
+                     FontAttributes="Bold"
+                    />
+
+
+          
+                <Label
+                Text="{Binding Main}"
+                IsVisible="{Binding Visible}"
+                HorizontalOptions="Center"
+                Margin="0,0,500,0"
+                FontSize="23"
+                 
+            />
+            <Label
+                Text="{Binding Description}"
+                IsVisible="{Binding Visible}"
+                 HorizontalOptions="Center"
+                Margin="0,0,100,0"
+                FontSize="22"
             />
 
             <Label
-                x:Name="exibicao"
-                
-                />
+             Text="{Binding Humidity, StringFormat='{0}%'}"
+             IsVisible="{Binding Visible}"
+             HorizontalOptions="Center"
+             Margin="295,0,0,0"
+             FontSize="25"
+    
+             />
 
+
+            <Label
+                 Text="{Binding Wind, StringFormat='{0} Km/h'}"
+                 IsVisible="{Binding Visible}"
+                 HorizontalOptions="Center"
+                 Margin="600,0,0,0"
+                 FontSize="25"
+             /> 
+            
+            
+            </Grid>
+            </Border>
+
+            
 
         </VerticalStackLayout>
     </ScrollView>
